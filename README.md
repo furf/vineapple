@@ -190,7 +190,7 @@ vine.searchTags('skateboarding').then(function (response) {
 * **Vineapple.login(username, password, callback)**
 
 ### Instance Methods
-
+_In most cases, **options** refers to pagination configuration with two optional settings: page and size (results per page)._
 * **vineapple.request(options, callback)**
 * **vineapple.login(username, password, callback)**
 * **vineapple.logout(callback)**
