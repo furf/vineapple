@@ -1,8 +1,8 @@
 # vineapple
 
-### A simple Vine API client for Node.js
+## A simple Vine API client for Node.js
 
-*This library provides access to the undocumented official Vine API.*
+*This library provides access to the undocumented official Vine API. It is not sanctioned by Vine nor guaranteed by the author.*
 
 * Read-only Vine API access to the following endpoints:
 	* `users/authenticate` Authenticate/deauthenticate user
@@ -25,7 +25,6 @@
 * Pagination support
 
 ## Installation
-----
 
 ### Using NPM
 
@@ -39,9 +38,8 @@ git clone https://github.com/furf/vineapple.git
 ```
 
 ## Getting Started
-----
 
-```
+```javascript
 var Vineapple = require('vineapple');
 
 // Instantiate a Vine API client
@@ -66,29 +64,27 @@ vine.login('ananas', 'c0m0$u$', function (error, client) {
 ```
 
 ## Instantiation
-----
 
 A Vineapple API client can be instantiated in one of two ways:
 
 1. Using the Vineapple constructor function.
 
-	```
+	```javascript
 	var vine = new Vineapple();
 	```
 2. Using the Vineapple factory method.
 
-	```
+	```javascript
 	var vine = Vineapple.create();
 	```
 
 Which you use is a matter of subjective choice.
 
 ## Authentication
-----
 
 Before a client can make API requests, it must be authenticated and authorized. Authentication
 
-```
+```javascript
 // Instantiate a Vine API client
 var vine = new Vineapple();
 
@@ -103,16 +99,15 @@ vine.login('ananas', 'c0m0$u$', function (error, client) {
 });
 ```
 
-```
+```javascript
 Vineapple.login('ananas', 'c0m0$u$', function (error, client) { /* ... */ });
 ```
 
 ## Authenticated Instances
-----
 
-In cases where you have cached the user's API settings, you can authorize the client immediately
+In cases where you have cached the user's API settings, you can authorize the client immediately. Note: this will not guarantee authorization if the client has been previously deauthorized.
 
-```
+```javascript
 var vine = new Vineapple({
   key: '0123456789abcdef01-23456789-abcd-ef01-2345-6789abcdef01',
   userId: '901234567890123456',
@@ -120,7 +115,7 @@ var vine = new Vineapple({
 });
 ```
 	
-```
+```javascript
 var vine = Vineapple.create({
   key: '0123456789abcdef01-23456789-abcd-ef01-2345-6789abcdef01',
   userId: '901234567890123456',
@@ -129,13 +124,12 @@ var vine = Vineapple.create({
 ```
 
 ## Node-style Callbacks vs. Promises
-----
 
 In most cases, how you handle the response is a matter of personal preference. This is not the place for that debate. Vineapple is flexible enough to let you leverage both techniques.
 
 ### Node-style Callbacks
 
-```
+```javascript
 vine.searchTags('skateboarding', function (error, response) {
 	
 	// Handle failure
@@ -154,7 +148,7 @@ vine.searchTags('skateboarding', function (error, response) {
 
 ### Promises
 
-```
+```javascript
 vine.searchTags('skateboarding').then(function (response) {
 		
 	// Handle success
@@ -172,65 +166,67 @@ vine.searchTags('skateboarding').then(function (response) {
 	}
 });
 ```
+
 ## API
-----
+
 ### Static Properties
-* #### Vineapple.API_ORIGIN
+
+* **Vineapple.API_ORIGIN**
 `"https://api.vineapp.com/"`
-* #### Vineapple.X_VINE_CLIENT
+* **Vineapple.X_VINE_CLIENT**
 `"ios/1.3.1"`
-* #### Vineapple.ACCEPT_LANGUAGE
+* **Vineapple.ACCEPT_LANGUAGE**
 `"en;q=1, fr;q=0.9, de;q=0.8, ja;q=0.7, nl;q=0.6, it;q=0.5"`
-* #### Vineapple.USER_AGENT
+* **Vineapple.USER_AGENT**
 `"iphone/1.3.1 (iPhone; iOS 6.1.3; Scale/2.00)"`
-* #### Vineapple.DEVICE_TOKEN
-* #### Vineapple.DEVICE_TOKEN_SEED
+* **Vineapple.DEVICE_TOKEN**
+* **Vineapple.DEVICE_TOKEN_SEED**
 `"Ananas comosus"`
 
 ### Static Methods
 
-* #### new Vineapple(_client_)
-#### Vineapple.create(_client_)
-* #### Vineapple.login(username, password_, callback_)
+* **new Vineapple(client)**
+**Vineapple.create(client)**
+* **Vineapple.login(username, password, callback)**
 
 ### Instance Methods
-* #### vineapple.request(options_, callback_)
-* #### vineapple.login(username, password_, callback_)
-* #### vineapple.logout(_callback_)
-* #### vineapple.authorize(settings)
-* #### vineapple.me(_callback_)
+
+* **vineapple.request(options, callback)**
+* **vineapple.login(username, password, callback)**
+* **vineapple.logout(callback)**
+* **vineapple.authorize(settings)**
+* **vineapple.me(callback)**
 `users/me` - Account settings for the authenticated user
-* #### vineapple.notifications(_callback_)
+* **vineapple.notifications(callback)**
 `users/$userId/pendingNotificationsCount` - Count of pending notifications (authenticated user only)
-* #### vineapple.graph(options_, callback_)
+* **vineapple.graph(options, callback)**
 `timelines/graph` - Timeline of accounts followed by the authenticated user
-* #### vineapple.searchUsers(query_, options, callback_)
+* **vineapple.searchUsers(query, options, callback)**
 `users/search/$query` - Search for users
-* #### vineapple.profile(userId_, callback_)
+* **vineapple.profile(userId, callback)**
 `users/profiles/$userId` - User profile
-* #### vineapple.user(userId_, options, callback_)
+* **vineapple.user(userId, options, callback)**
 `timelines/users/$userId` - Timeline of vines posted by a user
-* #### vineapple.likes(userId_, options, callback_)
+* **vineapple.likes(userId, options, callback)**
 `timelines/users/$userId/likes` - Timeline of vines liked by a user
-* #### vineapple.followers(userId_, options, callback_)
+* **vineapple.followers(userId, options, callback)**
 `users/$userId/followers` - List of users following a user
-* #### vineapple.following(userId_, options, callback_)
+* **vineapple.following(userId, options, callback)**
 `users/$userId/following` - List of users followed by a user
-* #### vineapple.twitter(userId_, callback_)
+* **vineapple.twitter(userId, callback)**
 `users/$userId/following/suggested/twitter` - List of suggested Twitter accounts
-* #### vineapple.popular(_options, callback_)
+* **vineapple.popular(options, callback)**
 `timelines/popular` - Timeline of popular vines
-* #### vineapple.promoted(_options, callback_)
+* **vineapple.promoted(options, callback)**
 `timelines/promoted` - Timeline of promoted vines
-* #### vineapple.searchTags(query_, options, callback_)
+* **vineapple.searchTags(query, options, callback)**
 `tags/search/$query` - Search for #hashtags
-* #### vineapple.tag(tag_, options, callback_)
+* **vineapple.tag(tag, options, callback)**
 `timelines/tags/$tag` - Timeline of vines by #hashtag
-* #### vineapple.venue(venue_, options, callback_)
+* **vineapple.venue(venue, options, callback)**
 `timelines/venues/$venueId` - Timeline of vines by venue
 
-
 ## etc.
-----
+
 * Licence: MIT
 * Author [Dave Furfero](https://github.com/furf)
