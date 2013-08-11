@@ -13,6 +13,7 @@
 	* `users/profiles/$userId` - User profile
 	* `timelines/users/$userId` - Timeline of vines posted by a user
 	* `timelines/users/$userId/likes` - Timeline of vines liked by a user
+	* `posts/$postId/likes` - Like/unlike a vine
 	* `users/$userId/followers` - List of users following a user
 	* `users/$userId/following` - List of users followed by a user
 	* `users/$userId/following/suggested/twitter` - List of suggested Twitter accounts
@@ -190,41 +191,49 @@ vine.searchTags('skateboarding').then(function (response) {
 * **Vineapple.login(username, password, callback)**
 
 ### Instance Methods
+
 _In most cases, **options** refers to pagination configuration with two optional settings: page and size (results per page)._
+
 * **vineapple.request(options, callback)**
+* **vineapple.authorize(settings)** - Set/unset a user's credentials
 * **vineapple.login(username, password, callback)**
+`POST users/authenticate` - Authenticate a user
 * **vineapple.logout(callback)**
-* **vineapple.authorize(settings)**
+`DELETE users/authenticate` - Deauthenticate a user
 * **vineapple.me(callback)**
-`users/me` - Account settings for the authenticated user
+`GET users/me` - Account settings for the authenticated user
 * **vineapple.notifications(callback)**
-`users/$userId/pendingNotificationsCount` - Count of pending notifications (authenticated user only)
+`GET users/$userId/pendingNotificationsCount` - Count of pending notifications (authenticated user only)
 * **vineapple.graph(options, callback)**
-`timelines/graph` - Timeline of accounts followed by the authenticated user
+`GET timelines/graph` - Timeline of accounts followed by the authenticated user
 * **vineapple.searchUsers(query, options, callback)**
-`users/search/$query` - Search for users
+`GET users/search/$query` - Search for users
 * **vineapple.profile(userId, callback)**
-`users/profiles/$userId` - User profile
+`GET users/profiles/$userId` - User profile
 * **vineapple.user(userId, options, callback)**
-`timelines/users/$userId` - Timeline of vines posted by a user
+`GET timelines/users/$userId` - Timeline of vines posted by a user
 * **vineapple.likes(userId, options, callback)**
-`timelines/users/$userId/likes` - Timeline of vines liked by a user
+`GET timelines/users/$userId/likes` - Timeline of vines liked by a user
+* **vineapple.like(postId, callback)**
+`POST posts/$postId/likes` - Like/unlike a vine
+* **vineapple.unlike(postId, callback)**
+`DELETE posts/$postId/likes` - Like/unlike a vine
 * **vineapple.followers(userId, options, callback)**
-`users/$userId/followers` - List of users following a user
+`GET users/$userId/followers` - List of users following a user
 * **vineapple.following(userId, options, callback)**
-`users/$userId/following` - List of users followed by a user
+`GET users/$userId/following` - List of users followed by a user
 * **vineapple.twitter(userId, callback)**
-`users/$userId/following/suggested/twitter` - List of suggested Twitter accounts
+`GET users/$userId/following/suggested/twitter` - List of suggested Twitter accounts
 * **vineapple.popular(options, callback)**
-`timelines/popular` - Timeline of popular vines
+`GET timelines/popular` - Timeline of popular vines
 * **vineapple.promoted(options, callback)**
-`timelines/promoted` - Timeline of promoted vines
+`GET timelines/promoted` - Timeline of promoted vines
 * **vineapple.searchTags(query, options, callback)**
-`tags/search/$query` - Search for #hashtags
+`GET tags/search/$query` - Search for #hashtags
 * **vineapple.tag(tag, options, callback)**
-`timelines/tags/$tag` - Timeline of vines by #hashtag
+`GET timelines/tags/$tag` - Timeline of vines by #hashtag
 * **vineapple.venue(venue, options, callback)**
-`timelines/venues/$venueId` - Timeline of vines by venue
+`GET timelines/venues/$venueId` - Timeline of vines by venue
 
 ## etc.
 
