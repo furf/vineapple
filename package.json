@@ -1,6 +1,6 @@
 {
   "name": "vineapple",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Dave Furfero <furf@furf.com>",
   "description": "A simple Vine API client for Node.js",
   "dependencies": {
